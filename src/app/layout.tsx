@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "캐릭터 챗봇 실습",
-  description: "나만의 캐릭터와 대화하는 Next.js 실습",
+  title: "나만의QUEEN 👑",
+  description: "넌 언제나 옳아. 항상 QUEEN의 마인드를 가지렴",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

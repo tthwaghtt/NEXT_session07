@@ -7,7 +7,6 @@ import {
   type CharacterDisplay,
   type Message,
 } from "@/lib/chat";
-import Image from "next/image";
 
 export default function Chat({ character }: { character: CharacterDisplay }) {
   // 성공한 대화만 기록합니다. 첫 인사는 화면에서 별도로 보여 주는 설정 문구입니다.
@@ -123,11 +122,10 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
 
   return (
     <main className="shell">
-      <section className="chat-card" aria-label={`${character.name}와 대화`}>
+      <section className="chat-card" aria-label={`${character.name} 대화창`}>
         <header className="chat-header">
-          {/* 캐릭터 사진 넣는 자리 */}
-          <div className="character-photo-slot" aria-label="캐릭터 사진 자리">
-            <Image src="/character.jpg" alt="치이카와" width={64} height={64} />
+          <div className="character-photo-slot" role="img" aria-label={character.name}>
+            <span aria-hidden="true">💅🏻</span>
           </div>
           <div className="character-info">
             <div className="character-name-row">
@@ -150,7 +148,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>새 대화</span>
+            <span>새 대화 ✨</span>
           </button>
         </header>
         <div
@@ -160,7 +158,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
           aria-live="polite"
         >
           <p className="conversation-start">
-            <span /> 치이카와를 발견했다! <span />
+            <span /> 👑 {character.name} 등장! 👑 <span />
           </p>
           <article className="message assistant">
             <span className="speaker">{character.name}</span>
@@ -171,7 +169,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
           {messages.map((message, index) => (
             <article className={`message ${message.role}`} key={index}>
               <span className="speaker">
-                {message.role === "user" ? "나" : character.name}
+                {message.role === "user" ? "나 🌷" : `${character.name} 💖`}
               </span>
               <p className="message-bubble">{message.content}</p>
             </article>
@@ -179,7 +177,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
           {isLoading && (
             <>
               <article className="message user pending">
-                <span className="speaker">나 · 전송 중</span>
+                <span className="speaker">나 · 전송 중 💌</span>
                 <p className="message-bubble">{pendingMessage}</p>
               </article>
               <p className="waiting" role="status">
@@ -188,7 +186,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
                   <i />
                   <i />
                 </span>
-                {character.name}가 답변을 생각하고 있어요…
+                👑 두근두근 공감 준비 중이에요 💭💖
               </p>
             </>
           )}
@@ -200,7 +198,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
               {error} 입력한 내용은 남아 있어요.
             </p>
           )}
-          <label htmlFor="message">메시지</label>
+          <label htmlFor="message">마음 속 이야기 ✏️</label>
           <div className="input-row">
             <textarea
               id="message"
@@ -219,7 +217,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
                   }
                 }
               }}
-              placeholder="메시지를 입력하세요..."
+              placeholder="오늘 있었던 일을 들려주세요 🥺💕"
               maxLength={MAX_MESSAGE_LENGTH}
               rows={2}
               disabled={isLoading}
@@ -244,7 +242,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
             </button>
           </div>
           <div className="input-help">
-            <span>새로고침하면 대화가 초기화됩니다.</span>
+            <span>새로고침하면 대화가 초기화돼요 🥲</span>
             <span>
               {input.length} / {MAX_MESSAGE_LENGTH}
             </span>
@@ -252,7 +250,7 @@ export default function Chat({ character }: { character: CharacterDisplay }) {
         </form>
       </section>
       <p className="footer-note">
-        AI 캐릭터의 성격이 실제 세계관과 맞지 않을 수 있어요.
+        나만의QUEEN은 과하게 공감하는 풍자 캐릭터예요 🎀 진짜 고민은 믿을 수 있는 사람과 꼭 나눠 주세요 💗
       </p>
     </main>
   );
